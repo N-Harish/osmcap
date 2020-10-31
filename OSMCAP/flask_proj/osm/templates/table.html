@@ -1,0 +1,204 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>  REPORT  </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+
+/*body{
+    background-color: white;
+    
+}    
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: maroon;
+}
+  
+li {
+    float: left;
+}
+  
+li a {
+    display: block;
+    color: yellow;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+  
+li a:hover {
+    background-color: #111;
+}
+  
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+  
+/*tr:nth-child(even){
+    background-color: #e0cfcf;
+}
+  
+th {
+    background-color: #4CAF50;
+    color: goldenrod;
+}*/
+
+
+
+
+body{
+    background: rgb(255, 154, 171);
+    background-image: url("https://lgana.com/assets/custom/images/poly-bg02.png");
+ font-family: Montserrat;
+
+ }
+ #top{
+     background: black;
+     height: 90px;
+     
+ }
+.active
+{
+    border: 1px solid black;
+    margin-left: 80%;
+    
+} 
+
+button{
+    background: rgb(211, 111, 111);
+    color:white;
+    border: 1px solid black;
+   border-radius: 5px;
+   font-size: 20px;
+   width: 90px;
+   height: 35px;
+   margin-top: 30px;
+   margin-left: 190px ;
+   box-shadow: 0px 10px 9.9px 0.1px rgba(155, 81, 81, 0.4);
+}
+button:hover{
+    background: rgb(255, 154, 171);
+    border: 1px  solid rgb(255, 154, 171);
+    color:black;
+    box-shadow: 0px 10px 20px 0.1px rgba(129, 47, 47, 0.548);
+   
+}
+
+h1{
+    margin-left: auto;
+    margin-right:auto;
+    margin-bottom: 60px;
+    border:1px solid black;
+    width: 180px;
+    background: black;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0px 10px 20px 0.1px rgba(129, 47, 47, 0.548);
+    
+}
+
+table{
+    margin-left: 17%;
+    background: whitesmoke;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width:70%;
+    
+}
+
+table, td, th {
+    border: 2px solid black;
+    padding: 8px;
+    text-align: center;
+    
+}
+
+  
+.topnav-right {
+  margin-left:1100px;
+  }
+
+.topnav {
+    background-color:black;
+    overflow: hidden;
+}
+
+a:link, a:visited
+{
+ background-color: #f44336;
+ color: white;
+ width: 150px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+</style>
+</head>
+    <body >
+
+        
+
+
+
+
+        <nav>
+            <div class="topnav">
+                
+                <div class="topnav-right">
+                    {% if current_user.is_authenticated %}
+                        <a  href="{{url_for('logout')}}"><h3>Logout</h3></a>
+                        
+                        
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+              
+                
+            
+        {% if current_user.is_authenticated %}
+            <h1 align="center">Summary</h1>      
+            <table>
+                <tr>
+                    
+                    <td><h2>Branch name</h2></td>
+                    
+                    <td><h2>Target</h2></td>
+                    <td><h2>Paper accessed</h2></td>
+                    <td><h2>Paper Moderated</h2></td>
+                    <td><h2>Total percent</h2></td>
+                </tr>
+                    
+                {% for detail in info%}
+                    <tr>
+                        <td><h3>{{detail.branch}}</h3></td>
+                        <td><h3>{{detail.Total_Target}}</h3></td>
+                        <td><h3>{{detail.paper}}</h3></td>
+                        <td><h3>{{detail.paper_m}}</h3></td>
+                        <td><h3>{{'%0.2f' %detail.Total_percent}}</h3></td>
+                    </tr>
+                {% endfor %}
+                    
+            </table>
+        {% else %}
+                
+                    
+            <div class="alert alert-warning">You are Not Logged In. Please Log in to continue</div>
+                
+            <div id="button" class="text-center"><a  href="{{url_for('login')}}"><h3>Login</h3></a></div>
+                
+        {% endif %}
+                       
+    </body>
+</html>
